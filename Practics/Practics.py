@@ -15,7 +15,7 @@ f = lambda x, t: 1/((x+t)*t**2)
 
 # Метод трапеций
 def trapez(x):
-    sumOfInter = 0.5 * (f(x, a) + f(x, b))
+    sumOfInter = (f(x, a) + f(x, b)) * 0.5
     for i in range(1, N):
         sumOfInter += f(x, a + i * h)
     return sumOfInter * h
@@ -52,8 +52,8 @@ print("Максимальная ошибка = ", error)
 plt.title("График\n\n Максимальная ошибка = {}\n".format(error))
 plt.ylabel("Значение определенного интеграла")
 plt.xlabel("Значение переменной x")
-plt.plot(xPoints, yExactPoints, "sr-", label="Приближенное")
-plt.plot(xPoints, yPoints, "sc-" , label="Точное")
+plt.plot(xPoints, yExactPoints, "sr-", label="Приближенное", linewidth=1.5, markersize=6)
+plt.plot(xPoints, yPoints, "sc-" , label="Точное", linewidth=1.5, markersize=6)
 plt.legend()
 plt.grid(True)
 plt.minorticks_on()
