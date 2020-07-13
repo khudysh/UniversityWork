@@ -22,24 +22,25 @@ def trapez(x):
 
 # Точное вычисление
 def exactIntegral(xPoints):
-    return np.log(xPoints[i]+2)/xPoints[i]**2-(np.log(xPoints[i]+1)-xPoints[i])/xPoints[i]**2-1/(2*xPoints[i])-np.log(2)/xPoints[i]**2
+    return np.log(xPoints+2)/xPoints**2-(np.log(xPoints+1)-xPoints)/xPoints**2-1/(2*xPoints)-np.log(2)/xPoints**2
 
 # Создание точек
 xPoints = [c + i*(d-c)/20 for i in range(k)]
 xPoints = np.array(xPoints)
 
-for i in range (k):
-    if xPoints[i] == 0:
-        xPoints[i] = 0.000001
-
-# Точное значение:
 yPoints = []
 yExactPoints = []
-for i in range (k):
-    yExactPoints.append(exactIntegral(xPoints))
 
-# Приближённое значение:
-yPoints = trapez(xPoints)
+# Вычисление значения аналитическим путем:
+for i in range (k):
+    if xPoints[i] == 0:
+        yExactPoints.append(0.375) # аналитически вычисленное значение, при x=0
+    else:
+        yExactPoints.append(exactIntegral(xPoints[i]))
+
+# Вычисление значения методом трапеций:
+for i in range (k):
+    yPoints.append(trapez(xPoints[i]))
 
 # Размер ошибки:
 error = 0.0
